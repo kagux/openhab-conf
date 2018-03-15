@@ -15,11 +15,11 @@ then
     Hallway_Lights_Switch_Proxy.sendCommand(ON)
 end
 
-rule "Hallway: turn ON lights when Exit door was opened"
+rule "Hallway: turn ON lights when Exit door opened"
 when
     Item Hallway_Exit_Door changed to OPEN
 then 
-    logInfo("hallway.rules", "Hallway exit door was opened")
+    logInfo("hallway.rules", "Hallway exit door opened")
     Hallway_Lights_Switch_Proxy.sendCommand(ON)
 end
 
@@ -43,7 +43,7 @@ then
         logInfo("hallway.rules", "Evening: setting lights to BRIGHT mode")
         Hallway_Lights_Dimmer.sendCommand(dayBrightness)
     }
-    if (now.getHourOfDay >= nightHour || now.getHourOfDay <= morningHour) {
+    if (now.getHourOfDay >= nightHour || now.getHourOfDay < morningHour) {
         logInfo("hallway.rules", "Night: using short switch to keep lights ON")
         Hallway_Lights_Short_Switch_Proxy.sendCommand(receivedCommand)
         logInfo("hallway.rules", "Night: settings lights to DIM mode")
