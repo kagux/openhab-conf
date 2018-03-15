@@ -1,0 +1,21 @@
+sitemap home label="Home Automation" {
+    Frame label="Hallway" {
+        Text item=Hallway_Exit_Door label="Exit door" icon="door"
+        Text item=Hallway_Exit_Door_LastOpened label="Exit door last opened [%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" icon="door"
+        Switch item=Hallway_Lights_Switch label="All lights" icon="light"
+        Slider item=Hallway_Lights_Dimmer label="Brightness"icon="slider"
+        Group item=Hallway_Lights label="Individual lights" icon="light"
+        Text item=Hallway_Temperature label="Temperature [%.1f °C]" icon="temperature"
+        Text item=Hallway_Humidity label="Humidity [%s]" icon="humidity"
+    }
+    Frame label="Bedroom" {
+        Switch item=Bedroom_Entrance_Motion label="Motion" icon="motion"
+        Text item=Bedroom_Entrance_LastMotion label="Last motion [%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" icon="motion"
+        Switch item=Bedroom_Entrance_Lights_Switch label="All lights" icon="light"
+        Slider item=Bedroom_Entrance_Lights_Dimmer label="Lights Brightness"icon="slider"
+    }
+    Frame label="Balcony" {
+        Text item=Balcony_HT_Temperature label="Temperature [%.1f °C]" icon="temperature"
+        Text item=Balcony_HT_Humidity label="Humidity [%s]" icon="humidity"
+    }
+}

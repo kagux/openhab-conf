@@ -1,0 +1,45 @@
+var Number dayBrightness = 95
+var Number nightBrightness = 10
+var Number lastBrightness = 40
+
+val Number eveningHour = 21
+val Number morningHour = 8
+
+rule "Bedroom Entrance: turn ON lights on bendroom entrance motion"
+when  
+    Item Bedroom_Entrance_Motion changed
+then
+    if (Bedroom_Entrance_Motion.state == ON) {
+        logInfo("bedroom_entrance.rules", "Detected motion in Bedroom Entrance")
+        logInfo("bedroom_entrance.rules", "Turning\\keeping lights ON")
+        Bedroom_Entrance_Lights_Switch.sendCommand(ON)
+    }
+end
+
+rule "Bedroom Entrance: adjust lights brightness"
+when
+    Time cron "0 */15 * * * ?"
+then
+    if (Bedroom_Entrance_Lights_Switch.state == ON){
+        if (now.getHourOfDay <= eveningHour && now.getHourOfDay >= morningHour) {
+            logInfo("bedroom_entrance.rules", "Settings lights to BRIGHT mode")
+            Bedroom_Entrance_Lights_Dimmer.sendCommand(dayBrightness)
+            lastBrightness = dayBrightness
+        }
+        else {
+            logInfo("bedroom_entrance.rules", "Settings lights to DIM mode")
+            Bedroom_Entrance_Lights_Dimmer.sendCommand(nightBrightness) 
+            lastBrightness = nightBrightness
+        }
+    }
+end
+
+rule "Bedroom Entrance: dim light after power reset"
+when
+    Item Bedroom_Entrance_Lights_Dimmer changed
+then 
+    if ((Bedroom_Entrance_Lights_Dimmer.state as Number).intValue == 100) {
+        logInfo("bedroom_entrance.rules", "Detected 100 brightness, probably after power reset. Dimming")
+        Bedroom_Entrance_Lights_Dimmer.sendCommand(lastBrightness)
+    }
+end

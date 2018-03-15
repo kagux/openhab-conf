@@ -1,0 +1,9 @@
+// Xiaomi Gateway
+Switch Gateway_LightSwitch <light> { channel="mihome:gateway:7811dcdece54:brightness" }
+Dimmer Gateway_Brightness <dimmablelight> { channel="mihome:gateway:7811dcdece54:brightness" }
+Color Gateway_Color <rgb> { channel="mihome:gateway:7811dcdece54:color" }
+Dimmer Gateway_ColorTemperature <heating> { channel="mihome:gateway:7811dcdece54:colorTemperature" }
+Number Gateway_AmbientLight <sun> { channel="mihome:gateway:7811dcdece54:illumination" }
+Number Gateway_Sound <soundvolume-0> { channel="mihome:gateway:7811dcdece54:sound" }
+Switch Gateway_SoundSwitch <soundvolume_mute> { channel="mihome:gateway:7811dcdece54:enableSound" }
+Dimmer Gateway_SoundVolume <soundvolume> { channel="mihome:gateway:7811dcdece54:volume" }

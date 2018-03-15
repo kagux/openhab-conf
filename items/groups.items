@@ -1,0 +1,15 @@
+// Hallway
+Group Hallway "Hallway"
+Group Hallway_Lights "Hallway Lights" (Hallway)
+Group:Switch:OR(ON,OFF) Hallway_Lights_Switch "Hallway Lights Switch" (Hallway_Lights)
+Group:Dimmer:AVG Hallway_Lights_Dimmer "Hallway Lights Dimmer" (Hallway_Lights)
+
+// Bedroom
+Group Bedroom "Hallway"
+Group Bedroom_Entrance "Bedroom Entrance" (Bedroom)
+Group Bedroom_Entrance_Lights "Bedroom Entrance Lights" (Bedroom_Entrance)
+Group:Switch:OR(ON,OFF) Bedroom_Entrance_Lights_Switch "Bedroom Entrance Lights Switch" (Bedroom_Entrance_Lights)
+Group:Dimmer:AVG Bedroom_Entrance_Lights_Dimmer "Bedroom Entrance Lights Dimmer" (Bedroom_Entrance_Lights)
+
+// Balcony
+Group Balcony "Balcony"

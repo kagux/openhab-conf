@@ -1,0 +1,5 @@
+// Xiaomi Temperature and Humidity Sensor
+Number Balcony_HT_Temperature "Temperature: [%.1f °C]" <temperature> (Balcony) { channel="mihome:sensor_ht:158d00016d153c:temperature" }
+Number Balcony_HT_Humidity "Humidity: [%.0f %%]" <humidity> (Balcony) { channel="mihome:sensor_ht:158d00016d153c:humidity" }
+Number Balcony_HT_Battery "Battery: [%d %%]" <battery> (Balcony) { channel="mihome:sensor_ht:158d00016d153c:batteryLevel" }
+Switch Balcony_HT_BatteryLow <energy> (Balcony) { channel="mihome:sensor_ht:158d00016d153c:lowBattery" }

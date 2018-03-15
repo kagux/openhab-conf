@@ -1,0 +1,64 @@
+// BRIGHTNESS constants
+val Number dayBrightness = 60
+val Number nightBrightness = 20
+
+// HOURS constants
+val Number nightHour = 21
+val Number morningHour = 8
+val Number eveningHour = 18
+
+rule "Hallway: turn ON lights on motion"
+when  
+    Item Hallway_Motion changed to ON
+then
+    logInfo("hallway.rules", "Detected motion in Hallway")
+    Hallway_Lights_Switch_Proxy.sendCommand(ON)
+end
+
+rule "Hallway: turn ON lights when Exit door was opened"
+when
+    Item Hallway_Exit_Door changed to OPEN
+then 
+    logInfo("hallway.rules", "Hallway exit door was opened")
+    Hallway_Lights_Switch_Proxy.sendCommand(ON)
+end
+
+rule "Hallway: dim light after power reset"
+when
+    Item Hallway_Lights_Dimmer changed
+then 
+    if ((Hallway_Lights_Dimmer.state as Number).intValue == 100) {
+        logInfo("hallway.rules", "Detected 100 brightness, probably after power reset. Dimming")
+        Hallway_Lights_Switch_Proxy.sendCommand(ON)
+    }
+end
+
+rule "Hallway: forward proxy switch"
+when
+    Item Hallway_Lights_Switch_Proxy received command
+then
+    if (now.getHourOfDay >= eveningHour && now.getHourOfDay < nightHour) {
+        logInfo("hallway.rules", "Evening: using long switch to keep lights ON")
+        Hallway_Lights_Long_Switch_Proxy.sendCommand(receivedCommand)
+        logInfo("hallway.rules", "Evening: setting lights to BRIGHT mode")
+        Hallway_Lights_Dimmer.sendCommand(dayBrightness)
+    }
+    if (now.getHourOfDay >= nightHour || now.getHourOfDay <= morningHour) {
+        logInfo("hallway.rules", "Night: using short switch to keep lights ON")
+        Hallway_Lights_Short_Switch_Proxy.sendCommand(receivedCommand)
+        logInfo("hallway.rules", "Night: settings lights to DIM mode")
+        Hallway_Lights_Dimmer.sendCommand(nightBrightness) 
+    }
+    else {
+        logInfo("hallway.rules", "Day: keep lights OFF")
+    }
+end
+
+rule "Hallway: forward short and long proxy switch"
+when
+    Item Hallway_Lights_Short_Switch_Proxy received command
+    or 
+    Item Hallway_Lights_Long_Switch_Proxy received command
+then
+    Hallway_Lights_Switch.sendCommand(receivedCommand)
+end

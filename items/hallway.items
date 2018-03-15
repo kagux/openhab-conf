@@ -1,0 +1,28 @@
+// Aeotec Multi Sensor 6
+Switch Hallway_Motion "Motion [%s]" <motion> (Hallway) { channel="zwave:device:5bdcd162:node2:sensor_binary" }
+//DateTime Hallway_Motion_Last_Detected "Last Motion [%1$tm/%1$td %1$tH:%1$tM]" <motion>  (Hallway)
+Number Hallway_Alarm "Alarm: [%s]" <fire> (Hallway) { channel="zwave:device:5bdcd162:node2:alarm_burglar" }
+Number Hallway_Temperature "Temperature: [%.1f °C]" <temperature> (Hallway) { channel="zwave:device:5bdcd162:node2:sensor_temperature" }
+Number Hallway_Humidity "Humidity: [%.0f %%]" <humidity> (Hallway) { channel="zwave:device:5bdcd162:node2:sensor_relhumidity" }
+Number Hallway_Luminance "Luminance: [%.0f Lux]" <sun> (Hallway) { channel="zwave:device:5bdcd162:node2:sensor_luminance" }
+Number Hallway_UV "Luminance: [UV index %d]" <sun> (Hallway) { channel="zwave:device:5bdcd162:node2:sensor_ultraviolet" }
+Number Hallway_Battery "Battery: [%d %%]" <battery> (Hallway) { channel="zwave:device:5bdcd162:node2:battery-level" }
+
+// Hue bulb 1
+Switch Hallway_Hue01_Switch <lightbulb> (Hallway_Lights_Switch) { channel="hue:0100:0017887647e7:1:brightness" }
+Dimmer Hallway_Hue01_Dimmer <lightbulb> (Hallway_Lights_Dimmer) { channel="hue:0100:0017887647e7:1:brightness" }
+
+// Hue bulb 2
+Switch Hallway_Hue02_Switch <lightbulb> (Hallway_Lights_Switch) { channel="hue:0100:0017887647e7:3:brightness" }
+Dimmer Hallway_Hue02_Dimmer <lightbulb> (Hallway_Lights_Dimmer) { channel="hue:0100:0017887647e7:3:brightness" }
+
+// Proxy Switches
+Switch Hallway_Lights_Short_Switch_Proxy { expire="1m,command=OFF" }
+Switch Hallway_Lights_Long_Switch_Proxy { expire="2m,command=OFF" }
+Switch Hallway_Lights_Switch_Proxy
+
+// Xiaomi aqara door sensor
+Contact Hallway_Exit_Door <door>  (Hallway) { channel="mihome:sensor_magnet_aq2:158d00022cd78d:isOpen" }
+DateTime Hallway_Exit_Door_LastOpened "[%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" <clock-on> (Hallway) { channel="mihome:sensor_magnet_aq2:158d00022cd78d:lastOpened" }
+Number Hallway_Exit_Door_Battery "Battery: [%d %%]" <battery> (Hallway) { channel="mihome:sensor_magnet_aq2:158d00022cd78d:batteryLevel" }
+Switch Hallway_Exit_Door_BatteryLow <energy> (Hallway) { channel="mihome:sensor_magnet_aq2:158d00022cd78d:lowBattery" }
