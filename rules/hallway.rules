@@ -37,13 +37,16 @@ rule "Hallway: forward proxy switch"
 when
     Item Hallway_Lights_Switch_Proxy received command
 then
-    if (now.getHourOfDay >= eveningHour && now.getHourOfDay < nightHour) {
+    val evening = now.getHourOfDay >= eveningHour && now.getHourOfDay < nightHour
+    val night = now.getHourOfDay >= nightHour || now.getHourOfDay < morningHour
+
+    if (evening) {
         logInfo("hallway.rules", "Evening: using long switch to keep lights ON")
         Hallway_Lights_Long_Switch_Proxy.sendCommand(receivedCommand)
         logInfo("hallway.rules", "Evening: setting lights to BRIGHT mode")
         Hallway_Lights_Dimmer.sendCommand(dayBrightness)
     }
-    if (now.getHourOfDay >= nightHour || now.getHourOfDay < morningHour) {
+    if (night) {
         logInfo("hallway.rules", "Night: using short switch to keep lights ON")
         Hallway_Lights_Short_Switch_Proxy.sendCommand(receivedCommand)
         logInfo("hallway.rules", "Night: settings lights to DIM mode")

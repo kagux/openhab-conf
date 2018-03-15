@@ -9,11 +9,11 @@ Number Hallway_UV "Luminance: [UV index %d]" <sun> (Hallway) { channel="zwave:de
 Number Hallway_Battery "Battery: [%d %%]" <battery> (Hallway) { channel="zwave:device:5bdcd162:node2:battery-level" }
 
 // Hue bulb 1
-Switch Hallway_Hue01_Switch <lightbulb> (Hallway_Lights_Switch) { channel="hue:0100:0017887647e7:1:brightness" }
+Switch Hallway_Hue01_Switch <lightbulb> (Hallway_Lights_Switch) { channel="hue:0100:0017887647e7:1:brightness", expire="3m,command=OFF" }
 Dimmer Hallway_Hue01_Dimmer <lightbulb> (Hallway_Lights_Dimmer) { channel="hue:0100:0017887647e7:1:brightness" }
 
 // Hue bulb 2
-Switch Hallway_Hue02_Switch <lightbulb> (Hallway_Lights_Switch) { channel="hue:0100:0017887647e7:3:brightness" }
+Switch Hallway_Hue02_Switch <lightbulb> (Hallway_Lights_Switch) { channel="hue:0100:0017887647e7:3:brightness", expire="3m,command=OFF" }
 Dimmer Hallway_Hue02_Dimmer <lightbulb> (Hallway_Lights_Dimmer) { channel="hue:0100:0017887647e7:3:brightness" }
 
 // Proxy Switches
