@@ -17,7 +17,7 @@ Switch Hallway_Hue02_Switch <lightbulb> (Hallway_Lights_Switch) { channel="hue:0
 Dimmer Hallway_Hue02_Dimmer <lightbulb> (Hallway_Lights_Dimmer) { channel="hue:0100:0017887647e7:3:brightness" }
 
 // Proxy Switches
-Switch Hallway_Lights_Short_Switch_Proxy { expire="1m,command=OFF" }
+Switch Hallway_Lights_Short_Switch_Proxy { expire="30s,command=OFF" }
 Switch Hallway_Lights_Long_Switch_Proxy { expire="2m,command=OFF" }
 Switch Hallway_Lights_Switch_Proxy
 
