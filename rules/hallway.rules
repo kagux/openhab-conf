@@ -57,11 +57,20 @@ then
     }
 end
 
-rule "Hallway: forward short and long proxy switch"
+rule "Hallway: forward short and long proxy switch commands"
 when
     Item Hallway_Lights_Short_Switch_Proxy received command
     or 
     Item Hallway_Lights_Long_Switch_Proxy received command
 then
     Hallway_Lights_Switch.sendCommand(receivedCommand)
+end
+
+rule "Hallway: forward short and long proxy switch updates"
+when
+    Item Hallway_Lights_Short_Switch_Proxy received update
+    or 
+    Item Hallway_Lights_Long_Switch_Proxy received update
+then
+    Hallway_Lights_Switch.postUpdate(triggeringItem.state)
 end

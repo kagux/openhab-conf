@@ -14,6 +14,11 @@ sitemap home label="Home Automation" {
         Switch item=Bedroom_Entrance_Lights_Switch label="All lights" icon="light"
         Slider item=Bedroom_Entrance_Lights_Dimmer label="Lights Brightness"icon="slider"
     }
+    Frame label="Living Room" {
+        Switch item=Living_Room_Wall_Switch label="All lights" icon="light"
+        Switch item=Living_Room_Wall_Switch_Button1 label="Entrance Lights" icon="light"
+        Switch item=Living_Room_Wall_Switch_Button2 label="TV Area Lights" icon="light"
+    }
     Frame label="Balcony" {
         Text item=Balcony_HT_Temperature label="Temperature [%.1f °C]" icon="temperature"
         Text item=Balcony_HT_Humidity label="Humidity [%s]" icon="humidity"

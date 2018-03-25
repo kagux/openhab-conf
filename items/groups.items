@@ -11,5 +11,9 @@ Group Bedroom_Entrance_Lights "Bedroom Entrance Lights" (Bedroom_Entrance)
 Group:Switch:OR(ON,OFF) Bedroom_Entrance_Lights_Switch "Bedroom Entrance Lights Switch" (Bedroom_Entrance_Lights)
 Group:Dimmer:AVG Bedroom_Entrance_Lights_Dimmer "Bedroom Entrance Lights Dimmer" (Bedroom_Entrance_Lights)
 
+// Living Room
+Group Living_Room "Living Room"
+Group:Switch:OR(ON,OFF) Living_Room_Wall_Switch "Living RoomB Wall Switch" (Living_Room)
+
 // Balcony
 Group Balcony "Balcony"

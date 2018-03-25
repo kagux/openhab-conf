@@ -1,0 +1,3 @@
+// Xiaomi Aqara Mains Powered Wall Switch 2
+Switch Living_Room_Wall_Switch_Button1 "Wall Switch Button 1" <switch> (Living_Room_Wall_Switch) { channel="mihome:ctrl_neutral2:158d000215287d:ch1" }
+Switch Living_Room_Wall_Switch_Button2 "Wall Switch Button 2" <switch> (Living_Room_Wall_Switch) { channel="mihome:ctrl_neutral2:158d000215287d:ch2" }
