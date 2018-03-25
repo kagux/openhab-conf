@@ -1,0 +1,7 @@
+// rule "Never turn off lights"
+// when 
+//     Item Living_Room_Wall_Switch changed to OFF
+// then
+//   logInfo("living_room.rules", "Lights turned ff, turning them on")
+//   Living_Room_Wall_Switch.sendCommand(ON)
+// end
