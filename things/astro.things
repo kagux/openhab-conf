@@ -1,0 +1,10 @@
+astro:sun:home    [ geolocation="41.41212,2.19668", interval=60 ]
+astro:sun:minus90 [ geolocation="41.41212,2.19668", interval=60 ] {
+    Channels:
+        Type start : rise#start [
+            offset=90
+        ]
+        Type end : rise#end [
+            offset=90
+        ]
+}

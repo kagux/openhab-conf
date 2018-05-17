@@ -22,7 +22,7 @@ Switch Hallway_Lights_Long_Switch_Proxy { expire="2m,command=OFF" }
 Switch Hallway_Lights_Switch_Proxy
 
 // Xiaomi aqara door sensor
-Contact Hallway_Exit_Door <door>  (Hallway) { channel="mihome:sensor_magnet_aq2:158d00022cd78d:isOpen" }
+Contact Hallway_Exit_Door "Exit Door [MAP(door.map):%s]"<door> (Hallway) { channel="mihome:sensor_magnet_aq2:158d00022cd78d:isOpen" }
 DateTime Hallway_Exit_Door_LastOpened "[%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" <clock-on> (Hallway) { channel="mihome:sensor_magnet_aq2:158d00022cd78d:lastOpened" }
 Number Hallway_Exit_Door_Battery "Battery: [%d %%]" <battery> (Hallway) { channel="mihome:sensor_magnet_aq2:158d00022cd78d:batteryLevel" }
 Switch Hallway_Exit_Door_BatteryLow <energy> (Hallway) { channel="mihome:sensor_magnet_aq2:158d00022cd78d:lowBattery" }

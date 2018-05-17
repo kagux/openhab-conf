@@ -7,10 +7,12 @@ sitemap home label="Home Automation" {
         Group item=Hallway_Lights label="Individual lights" icon="light"
         Text item=Hallway_Temperature label="Temperature [%.1f °C]" icon="temperature"
         Text item=Hallway_Humidity label="Humidity [%s]" icon="humidity"
+        Text item=Hallway_Luminance label="Luminance [%s]" icon="sun"
         Text item=Hallway_Battery label="Motion sensor battery [%d%%]" icon="battery"
         Text item=Hallway_Exit_Door_Battery label="Exit door battery [%d%%]" icon="battery"
     }
     Frame label="Bedroom" {
+        Text item=Bedroom_Entrance_Luminance label="Luminance [%s]" icon="sun"
         Switch item=Bedroom_Entrance_Motion label="Motion" icon="motion"
         Text item=Bedroom_Entrance_LastMotion label="Last motion [%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" icon="motion"
         Switch item=Bedroom_Entrance_Lights_Switch label="All lights" icon="light"
@@ -26,5 +28,8 @@ sitemap home label="Home Automation" {
         Text item=Balcony_HT_Temperature label="Temperature [%.1f °C]" icon="temperature"
         Text item=Balcony_HT_Humidity label="Humidity [%s]" icon="humidity"
         Text item=Balcony_HT_Battery label="Sensor battery [%d%%]" icon="battery"
+    }
+    Frame label="Astro" {
+        Text item=vTimeOfDay label="Time of day is [%s]" icon="sun"
     }
 }

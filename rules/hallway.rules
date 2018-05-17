@@ -1,17 +1,12 @@
-// BRIGHTNESS constants
-val Number dayBrightness = 60
-val Number nightBrightness = 20
+val logName = "hallway.rules"
 
-// HOURS constants
-val Number nightHour = 21
-val Number morningHour = 8
-val Number eveningHour = 18
+val Number dayBrightness = 80
 
 rule "Hallway: turn ON lights on motion"
 when  
     Item Hallway_Motion changed to ON
 then
-    logInfo("hallway.rules", "Detected motion in Hallway")
+    logInfo(logName, "Detected motion in Hallway")
     Hallway_Lights_Switch_Proxy.sendCommand(ON)
 end
 
@@ -19,7 +14,7 @@ rule "Hallway: turn ON lights when Exit door opened"
 when
     Item Hallway_Exit_Door changed to OPEN
 then 
-    logInfo("hallway.rules", "Hallway exit door opened")
+    logInfo(logName, "Hallway exit door opened")
     Hallway_Lights_Switch_Proxy.sendCommand(ON)
 end
 
@@ -28,7 +23,7 @@ when
     Item Hallway_Lights_Dimmer changed
 then 
     if ((Hallway_Lights_Dimmer.state as Number).intValue == 100) {
-        logInfo("hallway.rules", "Detected 100 brightness, probably after power reset. Dimming")
+        logInfo(logName, "Detected 100 brightness, probably after power reset. Dimming")
         Hallway_Lights_Switch_Proxy.sendCommand(ON)
     }
 end
@@ -37,23 +32,26 @@ rule "Hallway: forward proxy switch"
 when
     Item Hallway_Lights_Switch_Proxy received command
 then
-    val evening = now.getHourOfDay >= eveningHour && now.getHourOfDay < nightHour
-    val night = now.getHourOfDay >= nightHour || now.getHourOfDay < morningHour
-
-    if (evening) {
-        logInfo("hallway.rules", "Evening: using long switch to keep lights ON")
-        Hallway_Lights_Long_Switch_Proxy.sendCommand(receivedCommand)
-        logInfo("hallway.rules", "Evening: setting lights to BRIGHT mode")
-        Hallway_Lights_Dimmer.sendCommand(dayBrightness)
-    }
-    if (night) {
-        logInfo("hallway.rules", "Night: using short switch to keep lights ON")
-        Hallway_Lights_Short_Switch_Proxy.sendCommand(receivedCommand)
-        logInfo("hallway.rules", "Night: settings lights to DIM mode")
-        Hallway_Lights_Dimmer.sendCommand(nightBrightness) 
-    }
-    else {
-        logInfo("hallway.rules", "Day: keep lights OFF")
+    logInfo(logName, "Time of day is " + vTimeOfDay.state)
+    switch(vTimeOfDay.state) {
+        case "DAY",
+        case "AFTERNOON": {
+            if (Hallway_Luminance.state < 10) {
+                logInfo(logName, "It's dark, turning lights ON")
+                Hallway_Lights_Long_Switch_Proxy.sendCommand(receivedCommand)
+            }
+            logInfo(logName, "It's bright, keeping lights OFF")
+        }
+        case "MORNING",
+        case "EVENING": {
+            logInfo(logName, "Using long switch to keep lights ON")
+            Hallway_Lights_Long_Switch_Proxy.sendCommand(receivedCommand)
+        }
+        case "NIGHT",
+        case "BED": {
+            logInfo(logName, "Using long switch to keep lights ON")
+            Hallway_Lights_Short_Switch_Proxy.sendCommand(receivedCommand)
+        }
     }
 end
 
@@ -66,11 +64,11 @@ then
     Hallway_Lights_Switch.sendCommand(receivedCommand)
 end
 
-rule "Hallway: forward short and long proxy switch updates"
+rule "Hallway: set brightness"
 when
-    Item Hallway_Lights_Short_Switch_Proxy received update
-    or 
-    Item Hallway_Lights_Long_Switch_Proxy received update
+    Item Hallway_Lights_Switch received command
 then
-    Hallway_Lights_Switch.postUpdate(triggeringItem.state)
+    if (receivedCommand == ON) {
+        Hallway_Lights_Dimmer.sendCommand(dayBrightness)
+    }
 end
