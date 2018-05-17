@@ -1,6 +1,6 @@
 val logName = "hallway.rules"
-
 val Number dayBrightness = 80
+val Number nightBrightness = 40
 
 rule "Hallway: turn ON lights on motion"
 when  
@@ -62,7 +62,22 @@ when
     Item Hallway_Lights_Long_Switch_Proxy received command
 then
     Hallway_Lights_Switch.sendCommand(receivedCommand)
-    if (receivedCommand == ON) {
-        Hallway_Lights_Dimmer.sendCommand(dayBrightness)
+end
+
+rule "Hallway: set brightness"
+when
+    Item Hallway_Lights_Switch received command
+then
+    if (receivedCommand != ON) {
+        return
+    }
+    switch(vTimeOfDay.state) {
+        case "NIGHT",
+        case "BED": {
+            Hallway_Lights_Dimmer.sendCommand(nightBrightness)
+        }
+        default: {
+            Hallway_Lights_Dimmer.sendCommand(dayBrightness)
+        }
     }
 end
