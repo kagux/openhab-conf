@@ -62,12 +62,6 @@ when
     Item Hallway_Lights_Long_Switch_Proxy received command
 then
     Hallway_Lights_Switch.sendCommand(receivedCommand)
-end
-
-rule "Hallway: set brightness"
-when
-    Item Hallway_Lights_Switch received command
-then
     if (receivedCommand == ON) {
         Hallway_Lights_Dimmer.sendCommand(dayBrightness)
     }
