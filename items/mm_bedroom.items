@@ -1,0 +1,9 @@
+// Xiaomi Plug
+Switch MM_Bedroom_Plug_Switch <switch> (MM_Bedroom) { channel="mihome:sensor_plug:158d0001deada3:power" }
+Switch MM_Bedroom_Plug_Active <switch> (MM_Bedroom) { channel="mihome:sensor_plug:158d0001deada3:inUse" }
+Number MM_Bedroom_Plug_Power <energy> (MM_Bedroom) { channel="mihome:sensor_plug:158d0001deada3:loadPower" }
+Number MM_Bedroom_Plug_Consumption <line-incline> (MM_Bedroom) { channel="mihome:sensor_plug:158d0001deada3:powerConsumed" }
+
+// Proxy Switches
+Switch MM_Bedroom_Plug_Short_Switch_Proxy (MM_Bedroom) { expire="1h,command=OFF" }
+Switch MM_Bedroom_Plug_Long_Switch_Proxy (MM_Bedroom) { expire="6h,command=OFF" }

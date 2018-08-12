@@ -1,4 +1,8 @@
 sitemap home label="Home Automation" {
+    Frame label="Mia & Mat Bedroom" {
+        Switch item=MM_Bedroom_Plug_Switch label="Fan" icon="climate"
+        Switch item=MM_Bedroom_Plug_Active label="Fan" icon="climate"
+    }
     Frame label="Hallway" {
         Text item=Hallway_Exit_Door label="Exit door" icon="door"
         Text item=Hallway_Exit_Door_LastOpened label="Exit door last opened [%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" icon="door"
@@ -10,14 +14,17 @@ sitemap home label="Home Automation" {
         Text item=Hallway_Luminance label="Luminance [%s]" icon="sun"
         Text item=Hallway_Battery label="Motion sensor battery [%d%%]" icon="battery"
         Text item=Hallway_Exit_Door_Battery label="Exit door battery [%d%%]" icon="battery"
+        Text item=Hallway_Battery_1 label="Motion sensor 1 battery [%d%%]" icon="battery"
     }
     Frame label="Bedroom" {
-        Text item=Bedroom_Entrance_Luminance label="Luminance [%s]" icon="sun"
-        Switch item=Bedroom_Entrance_Motion label="Motion" icon="motion"
-        Text item=Bedroom_Entrance_LastMotion label="Last motion [%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" icon="motion"
+        Text item=Bedroom_Entrance_Luminance_1 label="Luminance [%s]" icon="sun"
+        Switch item=Bedroom_Entrance_Motion_1 label="Motion 1" icon="motion"
+        Switch item=Bedroom_Entrance_Motion_2 label="Motion 2" icon="motion"
+        Text item=Bedroom_Entrance_LastMotion_1 label="Last motion [%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" icon="motion"
         Switch item=Bedroom_Entrance_Lights_Switch label="All lights" icon="light"
         Slider item=Bedroom_Entrance_Lights_Dimmer label="Lights Brightness"icon="slider"
-        Text item=Bedroom_Entrance_Battery label="Motion sensor battery [%d%%]" icon="battery"
+        Text item=Bedroom_Entrance_Battery_1 label="Motion sensor 1 battery [%d%%]" icon="battery"
+        Text item=Bedroom_Entrance_Battery_2 label="Motion sensor 2 battery [%d%%]" icon="battery"
     }
     Frame label="Living Room" {
         Switch item=Living_Room_Wall_Switch label="All lights" icon="light"
@@ -28,6 +35,9 @@ sitemap home label="Home Automation" {
         Text item=Balcony_HT_Temperature label="Temperature [%.1f °C]" icon="temperature"
         Text item=Balcony_HT_Humidity label="Humidity [%s]" icon="humidity"
         Text item=Balcony_HT_Battery label="Sensor battery [%d%%]" icon="battery"
+    }
+    Frame label="Entrance" {
+        Text item=Entrance_Battery_1 label="Motion sensor 1 battery [%d%%]" icon="battery"
     }
     Frame label="Astro" {
         Text item=vTimeOfDay label="Time of day is [%s]" icon="sun"

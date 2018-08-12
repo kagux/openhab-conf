@@ -1,0 +1,7 @@
+// Xiaomi motion sensor 1
+Switch Entrance_Motion_1 <motion> (Entrance) { channel="mihome:sensor_motion_aq2:158d0001e0ad52:motion", expire="30s,state=OFF" }
+Number Entrance_MotionTimer_1 <clock> { channel="mihome:sensor_motion_aq2:158d0001e0ad52:motionOffTimer" }
+DateTime Entrance_LastMotion_1 "[%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" <clock-on> { channel="mihome:sensor_motion_aq2:158d0001e0ad52:lastMotion" }
+Number Entrance_Luminance_1 "Luminance: [%.0f Lux]" <sun> (Entrance) { channel="mihome:sensor_motion_aq2:158d0001e0ad52:illumination" }
+Number Entrance_Battery_1 "Battery: [%d %%]" <battery> { channel="mihome:sensor_motion_aq2:158d0001e0ad52:batteryLevel" }
+Switch Entrance_BatteryLow_1 <energy> { channel="mihome:sensor_motion_aq2:158d0001e0ad52:lowBattery" }

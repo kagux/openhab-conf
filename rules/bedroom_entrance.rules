@@ -1,21 +1,16 @@
-// BRIGHTNESS constants
-val Number dayBrightness = 80
-val Number nightBrightness = 20
+val logName = "bedroom_entrance.rules"
 
-// HOURS constants
-val Number eveningHour = 17
-val Number nightHour = 21
-val Number morningHour = 8
-val Number dayHour = 10
+// BRIGHTNESS constants
+val Number dayBrightness = 90
+val Number nightBrightness = 20
 
 rule "Bedroom Entrance: turn ON lights on bendroom entrance motion"
 when  
-    Item Bedroom_Entrance_Motion changed
+    Item Bedroom_Entrance_Motion_1 changed to ON or 
+    Item Bedroom_Entrance_Motion_2 changed to ON
 then
-    if (Bedroom_Entrance_Motion.state == ON) {
-        logInfo("bedroom_entrance.rules", "Detected motion in Bedroom Entrance")
-        Bedroom_Entrance_Lights_Switch_Proxy.sendCommand(ON)
-    }
+    logInfo("bedroom_entrance.rules", "Detected motion in Bedroom Entrance")
+    Bedroom_Entrance_Lights_Switch.sendCommand(ON)
 end
 
 rule "Bedroom Entrance: dim light after power reset"
@@ -24,49 +19,24 @@ when
 then 
     if ((Bedroom_Entrance_Lights_Dimmer.state as Number).intValue == 100) {
         logInfo("bedroom_entrance.rules", "Detected 100 brightness, probably after power reset. Dimming")
-        Bedroom_Entrance_Lights_Switch_Proxy.sendCommand(ON)
+        Bedroom_Entrance_Lights_Switch.sendCommand(ON)
     }
 end
 
-rule "Bedroom Entrance: forward proxy switch"
+rule "Bedroom Entrance: set brightness"
 when
-    Item Bedroom_Entrance_Lights_Switch_Proxy received command
+    Item Bedroom_Entrance_Lights_Switch received command
 then
-    val evening = now.getHourOfDay >= eveningHour && now.getHourOfDay < nightHour
-    val night = now.getHourOfDay >= nightHour || now.getHourOfDay < morningHour
-    val morning = now.getHourOfDay >= morningHour && now.getHourOfDay < dayHour
-
-    if (evening || morning) {
-        logInfo("bedroom_entrance.rules", "Evening: using long switch to keep lights ON")
-        Bedroom_Entrance_Lights_Long_Switch_Proxy.sendCommand(receivedCommand)
-        logInfo("bedroom_entrance.rules", "Evening: setting lights to BRIGHT mode")
-        Bedroom_Entrance_Lights_Dimmer.sendCommand(dayBrightness)
+    if (receivedCommand != ON) {
+        return
     }
-    if (night) {
-        logInfo("bedroom_entrance.rules", "Night: using short switch to keep lights ON")
-        Bedroom_Entrance_Lights_Short_Switch_Proxy.sendCommand(receivedCommand)
-        logInfo("bedroom_entrance.rules", "Night: settings lights to DIM mode")
-        Bedroom_Entrance_Lights_Dimmer.sendCommand(nightBrightness) 
+    switch(vTimeOfDay.state) {
+        case "NIGHT",
+        case "BED": {
+            Bedroom_Entrance_Lights_Dimmer.sendCommand(nightBrightness)
+        }
+        default: {
+            Bedroom_Entrance_Lights_Dimmer.sendCommand(dayBrightness)
+        }
     }
-    else {
-        logInfo("bedroom_entrance.rules", "Day: keep lights OFF")
-    }
-end
-
-rule "Bedroom Entrance: forward short and long proxy switch"
-when
-    Item Bedroom_Entrance_Lights_Short_Switch_Proxy received command
-    or 
-    Item Bedroom_Entrance_Lights_Long_Switch_Proxy received command
-then
-    Bedroom_Entrance_Lights_Switch.sendCommand(receivedCommand)
-end
-
-rule "Bedroom Entrance: forward short and long proxy switch updates"
-when
-    Item Bedroom_Entrance_Lights_Short_Switch_Proxy received update
-    or 
-    Item Bedroom_Entrance_Lights_Long_Switch_Proxy received update
-then
-    Bedroom_Entrance_Lights_Switch.postUpdate(triggeringItem.state)
 end

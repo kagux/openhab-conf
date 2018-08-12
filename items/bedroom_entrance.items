@@ -1,22 +1,19 @@
 // Hue bulb 1
-Switch Bedroom_Entrance_Hue01_Switch <lightbulb> (Bedroom_Entrance_Lights_Switch) { channel="hue:0100:0017887647e7:2:brightness" }
+Switch Bedroom_Entrance_Hue01_Switch <lightbulb> (Bedroom_Entrance_Lights_Switch) { channel="hue:0100:0017887647e7:2:brightness", expire="1m30s,command=OFF"  }
 Dimmer Bedroom_Entrance_Hue01_Dimmer <lightbulb> (Bedroom_Entrance_Lights_Dimmer) { channel="hue:0100:0017887647e7:2:brightness" }
 
-// Xiaomi motion sensor
-Switch Bedroom_Entrance_Motion <motion> (Bedroom_Entrance) { channel="mihome:sensor_motion_aq2:158d0001e08c81:motion", expire="15s,state=OFF" }
-Number Bedroom_Entrance_MotionTimer <clock> { channel="mihome:sensor_motion_aq2:158d0001e08c81:motionOffTimer" }
-DateTime Bedroom_Entrance_LastMotion "[%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" <clock-on> { channel="mihome:sensor_motion_aq2:158d0001e08c81:lastMotion" }
-Number Bedroom_Entrance_Luminance "Luminance: [%.0f Lux]" <sun> (Bedroom_Entrance) { channel="mihome:sensor_motion_aq2:158d0001e08c81:illumination" }
-Number Bedroom_Entrance_Battery "Battery: [%d %%]" <battery> { channel="mihome:sensor_motion_aq2:158d0001e08c81:batteryLevel" }
-Switch Bedroom_Entrance_BatteryLow <energy> { channel="mihome:sensor_motion_aq2:158d0001e08c81:lowBattery" }
+// Xiaomi motion sensor 1
+Switch Bedroom_Entrance_Motion_1 <motion> (Bedroom_Entrance) { channel="mihome:sensor_motion_aq2:158d0001e08c81:motion", expire="1m,state=OFF" }
+Number Bedroom_Entrance_MotionTimer_1 <clock> { channel="mihome:sensor_motion_aq2:158d0001e08c81:motionOffTimer" }
+DateTime Bedroom_Entrance_LastMotion_1 "[%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" <clock-on> { channel="mihome:sensor_motion_aq2:158d0001e08c81:lastMotion" }
+Number Bedroom_Entrance_Luminance_1 "Luminance: [%.0f Lux]" <sun> (Bedroom_Entrance) { channel="mihome:sensor_motion_aq2:158d0001e08c81:illumination" }
+Number Bedroom_Entrance_Battery_1 "Battery: [%d %%]" <battery> { channel="mihome:sensor_motion_aq2:158d0001e08c81:batteryLevel" }
+Switch Bedroom_Entrance_BatteryLow_1 <energy> { channel="mihome:sensor_motion_aq2:158d0001e08c81:lowBattery" }
 
-// Proxy Switches
-Switch Bedroom_Entrance_Lights_Short_Switch_Proxy { expire="30s,command=OFF" }
-Switch Bedroom_Entrance_Lights_Long_Switch_Proxy { expire="1m,command=OFF" }
-Switch Bedroom_Entrance_Lights_Switch_Proxy
-
-Switch Bedroom_Entrance_Control_Switch_Proxy { expire="3m,command=OFF" }
-
-// Xiaomi Switch
-Number Bedroom_Entrance_Switch_Battery <battery> { channel="mihome:sensor_switch_aq2:158d000215cbd9:batteryLevel" }
-Switch Bedroom_Entrance_Switch_BatteryLow <energy> { channel="mihome:sensor_switch_aq2:158d000215cbd9:lowBattery" }
+// Xiaomi motion sensor 2
+Switch Bedroom_Entrance_Motion_2 <motion> (Bedroom_Entrance) { channel="mihome:sensor_motion_aq2:158d0001e08c62:motion", expire="1m,state=OFF" }
+Number Bedroom_Entrance_MotionTimer_2 <clock> { channel="mihome:sensor_motion_aq2:158d0001e08c62:motionOffTimer" }
+DateTime Bedroom_Entrance_LastMotion_2 "[%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" <clock-on> { channel="mihome:sensor_motion_aq2:158d0001e08c62:lastMotion" }
+Number Bedroom_Entrance_Luminance_2 "Luminance: [%.0f Lux]" <sun> (Bedroom_Entrance) { channel="mihome:sensor_motion_aq2:158d0001e08c62:illumination" }
+Number Bedroom_Entrance_Battery_2 "Battery: [%d %%]" <battery> { channel="mihome:sensor_motion_aq2:158d0001e08c62:batteryLevel" }
+Switch Bedroom_Entrance_BatteryLow_2 <energy> { channel="mihome:sensor_motion_aq2:158d0001e08c62:lowBattery" }

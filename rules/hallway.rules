@@ -1,10 +1,20 @@
 val logName = "hallway.rules"
-val Number dayBrightness = 80
-val Number nightBrightness = 40
+val Number dayBrightness = 60
+val Number nightBrightness = 20
+
+rule "Xiaomi default values"
+when
+    System started
+then
+    Entrance_MotionTimer_1.sendCommand(30)
+    Hallway_MotionTimer_1.sendCommand(30)
+end
 
 rule "Hallway: turn ON lights on motion"
 when  
-    Item Hallway_Motion changed to ON
+    Item Hallway_Motion changed to ON or
+    Item Hallway_Motion_1 changed to ON or
+    Item Entrance_Motion_1 changed to ON
 then
     logInfo(logName, "Detected motion in Hallway")
     Hallway_Lights_Switch_Proxy.sendCommand(ON)
@@ -30,38 +40,25 @@ end
 
 rule "Hallway: forward proxy switch"
 when
-    Item Hallway_Lights_Switch_Proxy received command
+    Item Hallway_Lights_Switch_Proxy received command ON
 then
     logInfo(logName, "Time of day is " + vTimeOfDay.state)
     switch(vTimeOfDay.state) {
+        case "MORNING",
         case "DAY",
         case "AFTERNOON": {
             if (Hallway_Luminance.state < 10) {
                 logInfo(logName, "It's dark, turning lights ON")
-                Hallway_Lights_Long_Switch_Proxy.sendCommand(receivedCommand)
+                Hallway_Lights_Switch.sendCommand(receivedCommand)
             }
             logInfo(logName, "It's bright, keeping lights OFF")
         }
-        case "MORNING",
-        case "EVENING": {
-            logInfo(logName, "Using long switch to keep lights ON")
-            Hallway_Lights_Long_Switch_Proxy.sendCommand(receivedCommand)
-        }
+        case "EVENING",
         case "NIGHT",
         case "BED": {
-            logInfo(logName, "Using long switch to keep lights ON")
-            Hallway_Lights_Short_Switch_Proxy.sendCommand(receivedCommand)
+            Hallway_Lights_Switch.sendCommand(receivedCommand)
         }
     }
-end
-
-rule "Hallway: forward short and long proxy switch commands"
-when
-    Item Hallway_Lights_Short_Switch_Proxy received command
-    or 
-    Item Hallway_Lights_Long_Switch_Proxy received command
-then
-    Hallway_Lights_Switch.sendCommand(receivedCommand)
 end
 
 rule "Hallway: set brightness"

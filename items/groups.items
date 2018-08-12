@@ -17,3 +17,9 @@ Group:Switch:OR(ON,OFF) Living_Room_Wall_Switch "Living RoomB Wall Switch" (Livi
 
 // Balcony
 Group Balcony "Balcony"
+
+// Mia & Mat Bedroom
+Group MM_Bedroom "Mia & Mat Bedroom"
+
+// Entrance
+Group Entrance "Home Entrance"

@@ -8,17 +8,23 @@ Number Hallway_Luminance "Luminance: [%.0f Lux]" <sun> (Hallway) { channel="zwav
 Number Hallway_UV "Luminance: [UV index %d]" <sun> (Hallway) { channel="zwave:device:5bdcd162:node2:sensor_ultraviolet" }
 Number Hallway_Battery "Battery: [%d %%]" <battery> (Hallway) { channel="zwave:device:5bdcd162:node2:battery-level" }
 
+// Xiaomi motion sensor 1
+Switch Hallway_Motion_1 <motion> (Hallway) { channel="mihome:sensor_motion_aq2:158d0001e0b206:motion", expire="1m,state=OFF" }
+Number Hallway_MotionTimer_1 <clock> { channel="mihome:sensor_motion_aq2:158d0001e0b206:motionOffTimer" }
+DateTime Hallway_LastMotion_1 "[%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" <clock-on> { channel="mihome:sensor_motion_aq2:158d0001e0b206:lastMotion" }
+Number Hallway_Luminance_1 "Luminance: [%.0f Lux]" <sun> (Hallway) { channel="mihome:sensor_motion_aq2:158d0001e0b206:illumination" }
+Number Hallway_Battery_1 "Battery: [%d %%]" <battery> { channel="mihome:sensor_motion_aq2:158d0001e0b206:batteryLevel" }
+Switch Hallway_BatteryLow_1 <energy> { channel="mihome:sensor_motion_aq2:158d0001e0b206:lowBattery" }
+
 // Hue bulb 1
-Switch Hallway_Hue01_Switch <lightbulb> (Hallway_Lights_Switch) { channel="hue:0100:0017887647e7:1:brightness", expire="3m,command=OFF" }
+Switch Hallway_Hue01_Switch <lightbulb> (Hallway_Lights_Switch) { channel="hue:0100:0017887647e7:1:brightness", expire="1m,command=OFF" }
 Dimmer Hallway_Hue01_Dimmer <lightbulb> (Hallway_Lights_Dimmer) { channel="hue:0100:0017887647e7:1:brightness" }
 
 // Hue bulb 2
-Switch Hallway_Hue02_Switch <lightbulb> (Hallway_Lights_Switch) { channel="hue:0100:0017887647e7:3:brightness", expire="3m,command=OFF" }
+Switch Hallway_Hue02_Switch <lightbulb> (Hallway_Lights_Switch) { channel="hue:0100:0017887647e7:3:brightness", expire="1m,command=OFF" }
 Dimmer Hallway_Hue02_Dimmer <lightbulb> (Hallway_Lights_Dimmer) { channel="hue:0100:0017887647e7:3:brightness" }
 
 // Proxy Switches
-Switch Hallway_Lights_Short_Switch_Proxy { expire="30s,command=OFF" }
-Switch Hallway_Lights_Long_Switch_Proxy { expire="2m,command=OFF" }
 Switch Hallway_Lights_Switch_Proxy
 
 // Xiaomi aqara door sensor
