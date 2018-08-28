@@ -1,6 +1,6 @@
 val logName = "hallway.rules"
-val Number dayBrightness = 60
-val Number nightBrightness = 20
+val Number dayBrightness = 50
+val Number nightBrightness = 10
 
 rule "Xiaomi default values"
 when
@@ -47,7 +47,7 @@ then
         case "MORNING",
         case "DAY",
         case "AFTERNOON": {
-            if (Hallway_Luminance.state < 10) {
+            if (Hallway_Luminance.state < 5) {
                 logInfo(logName, "It's dark, turning lights ON")
                 Hallway_Lights_Switch.sendCommand(receivedCommand)
             }

@@ -3,6 +3,7 @@ Group Hallway "Hallway"
 Group Hallway_Lights "Hallway Lights" (Hallway)
 Group:Switch:OR(ON,OFF) Hallway_Lights_Switch "Hallway Lights Switch" (Hallway_Lights)
 Group:Dimmer:AVG Hallway_Lights_Dimmer "Hallway Lights Dimmer" (Hallway_Lights)
+Group:Number:MAX Hallway_Luminance "Hallway Luminance" (Hallway)
 
 // Bedroom
 Group Bedroom "Hallway"
@@ -13,7 +14,7 @@ Group:Dimmer:AVG Bedroom_Entrance_Lights_Dimmer "Bedroom Entrance Lights Dimmer"
 
 // Living Room
 Group Living_Room "Living Room"
-Group:Switch:OR(ON,OFF) Living_Room_Wall_Switch "Living RoomB Wall Switch" (Living_Room)
+Group:Switch:OR(ON,OFF) Living_Room_Wall_Switch "Living room lights" (Living_Room) [ "Lighting" ]
 
 // Balcony
 Group Balcony "Balcony"
