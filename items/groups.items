@@ -15,6 +15,7 @@ Group:Dimmer:AVG Bedroom_Entrance_Lights_Dimmer "Bedroom Entrance Lights Dimmer"
 // Living Room
 Group Living_Room "Living Room"
 Group:Switch:OR(ON,OFF) Living_Room_Wall_Switch "Living room lights" (Living_Room) [ "Lighting" ]
+Group Living_Room_Tv "Living Room TV"
 
 // Balcony
 Group Balcony "Balcony"
@@ -24,3 +25,14 @@ Group MM_Bedroom "Mia & Mat Bedroom"
 
 // Entrance
 Group Entrance "Home Entrance"
+
+
+// Xiaomi Roborock Vacuum
+
+Group  gXiaomiVac               "Xiaomi Robot Vacuum"       <fan>
+Group  gXiaomiVacStat           "Status Details"            <status>            (gXiaomiVac)
+Group  gXiaomiVacUsage          "Consumables Usage"         <line-increase>     (gXiaomiVac)
+Group  gXiaomiVacDND            "Do Not Disturb Settings"   <moon>              (gXiaomiVac)
+Group  gXiaomiVacHistory        "Cleaning History"          <calendar>          (gXiaomiVac)
+Group  gXiaomiVacNetwork        "Network Details"           <network>           (gXiaomiVac)
+Group:Switch:OR(ON,OFF)  Vacuum_Zone_Clean_Switches "Vacuum Clean Switches" (gXiaomiVac)

@@ -1,45 +1,84 @@
 sitemap home label="Home Automation" {
-    Frame label="Mia & Mat Bedroom" {
-        Switch item=MM_Bedroom_Plug_Switch label="Fan" icon="climate"
-        Switch item=MM_Bedroom_Plug_Active label="Fan" icon="climate"
+    // Frame label="Mia & Mat Bedroom" {
+    // }
+    Frame label="General" {
+        Group item=gXiaomiVac label="Vacuum"{
+                Switch item=XiaVac_action_Control mappings=[vacuum="Vacuum", pause="Pause",spot="Spot", dock="Dock"]
+                Switch item=XiaVac_action_Fan mappings=[38="Silent", 60="Normal", 77="Power",90="Full", -1="Custom"]
+                Group  item=Vacuum_Zone_Clean_Switches label="Zone Cleaning"
+                Switch item=Vacuum_Switch label="Start cleaning"
+                Default item=XiaVac_status_Battery
+                Default item=XiaVac_status_Area
+                Default item=XiaVac_status_Time
+                Group  item=gXiaomiVacStat
+                Group  item=gXiaomiVacUsage
+                Group  item=gXiaomiVacDND
+                Group  item=gXiaomiVacHistory
+                Group  item=gXiaomiVacNetwork
+        }
     }
-    Frame label="Hallway" {
-        Text item=Hallway_Exit_Door label="Exit door" icon="door"
-        Text item=Hallway_Exit_Door_LastOpened label="Exit door last opened [%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" icon="door"
-        Switch item=Hallway_Lights_Switch label="All lights" icon="light"
-        Slider item=Hallway_Lights_Dimmer label="Brightness"icon="slider"
-        Group item=Hallway_Lights label="Individual lights" icon="light"
-        Text item=Hallway_Temperature label="Temperature [%.1f °C]" icon="temperature"
-        Text item=Hallway_Humidity label="Humidity [%s]" icon="humidity"
-        Text item=Hallway_Luminance label="Luminance [%s]" icon="sun"
-        Text item=Hallway_Battery label="Motion sensor battery [%d%%]" icon="battery"
-        Text item=Hallway_Exit_Door_Battery label="Exit door battery [%d%%]" icon="battery"
-        Text item=Hallway_Battery_1 label="Motion sensor 1 battery [%d%%]" icon="battery"
+
+    Frame label="Lights" {
+        Switch item=Hallway_Lights_Switch label="Hallway" icon="light"
+        Slider item=Hallway_Lights_Dimmer label="Hallway"icon="slider"
+        Switch item=Bedroom_Entrance_Lights_Switch label="Bedroom Entrance" icon="light"
+        Slider item=Bedroom_Entrance_Lights_Dimmer label="Bedroom Entrance"icon="slider"
+        Switch item=Living_Room_Wall_Switch label="Living Room" icon="light"
+        Switch item=Living_Room_Wall_Switch_Button1 label="Living Room Entrance Lights" icon="light"
+        Switch item=Living_Room_Wall_Switch_Button2 label="Living Room TV Area Lights" icon="light"
     }
-    Frame label="Bedroom" {
-        Text item=Bedroom_Entrance_Luminance_1 label="Luminance [%s]" icon="sun"
-        Switch item=Bedroom_Entrance_Motion_1 label="Motion 1" icon="motion"
-        Switch item=Bedroom_Entrance_Motion_2 label="Motion 2" icon="motion"
-        Text item=Bedroom_Entrance_LastMotion_1 label="Last motion [%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" icon="motion"
-        Switch item=Bedroom_Entrance_Lights_Switch label="All lights" icon="light"
-        Slider item=Bedroom_Entrance_Lights_Dimmer label="Lights Brightness"icon="slider"
-        Text item=Bedroom_Entrance_Battery_1 label="Motion sensor 1 battery [%d%%]" icon="battery"
-        Text item=Bedroom_Entrance_Battery_2 label="Motion sensor 2 battery [%d%%]" icon="battery"
+
+    Frame label="Temperature" {
+        Text item=Balcony_HT_Temperature label="Outside [%.1f °C]" icon="temperature"
+        Text item=Hallway_Temperature label="Hallway [%.1f °C]" icon="temperature"
     }
-    Frame label="Living Room" {
-        Switch item=Living_Room_Wall_Switch label="All lights" icon="light"
-        Switch item=Living_Room_Wall_Switch_Button1 label="Entrance Lights" icon="light"
-        Switch item=Living_Room_Wall_Switch_Button2 label="TV Area Lights" icon="light"
+
+    Frame label="Rooms" {
+        Group item=Hallway label="Hallway" {
+            Text item=Hallway_Exit_Door label="Exit door" icon="door"
+            Switch item=Hallway_Lights_Switch label="All lights" icon="light"
+            Slider item=Hallway_Lights_Dimmer label="Brightness"icon="slider"
+            Text item=Hallway_Temperature label="Temperature [%.1f °C]" icon="temperature"
+            Text item=Hallway_Humidity label="Humidity [%s]" icon="humidity"
+            Text item=Hallway_Luminance label="Luminance [%s]" icon="sun"
+            Text item=Hallway_Battery label="Motion sensor battery [%d%%]" icon="battery"
+            Text item=Hallway_Exit_Door_Battery label="Exit door battery [%d%%]" icon="battery"
+            Text item=Hallway_Battery_1 label="Motion sensor 1 battery [%d%%]" icon="battery"
+        }
+
+        Group item=Bedroom label="Bedroom" {
+            Text item=Bedroom_Entrance_Luminance_1 label="Luminance [%s]" icon="sun"
+            Switch item=Bedroom_Entrance_Lights_Switch label="All lights" icon="light"
+            Slider item=Bedroom_Entrance_Lights_Dimmer label="Lights Brightness"icon="slider"
+            Text item=Bedroom_Entrance_Battery_1 label="Motion sensor 1 battery [%d%%]" icon="battery"
+            Text item=Bedroom_Entrance_Battery_2 label="Motion sensor 2 battery [%d%%]" icon="battery"
+        }
+
+        Group item=Living_Room label="Living Room" {
+            Group item=Living_Room_Tv label="TV" {
+                Switch	item=Bravia_Power label="Power" icon="switch"
+                Slider	item=Bravia_Volume label="Volume" icon="soundvolume"
+                Switch item=Bravia_AudioMute label="Mute" icon="soundvolume"
+                Selection item=Bravia_Input_Switch label="Source" mappings=[HDMI1="PS4", HDMI2="CHROMECAST", HDMI4="FireTV"] icon="receiver"
+ 
+            }
+            Switch item=Living_Room_Wall_Switch label="All lights" icon="light"
+            Switch item=Living_Room_Wall_Switch_Button1 label="Entrance Lights" icon="light"
+            Switch item=Living_Room_Wall_Switch_Button2 label="TV Area Lights" icon="light"
+        }
+
+        Group item=Balcony label="Balcony" {
+            Text item=Balcony_HT_Temperature label="Temperature [%.1f °C]" icon="temperature"
+            Text item=Balcony_HT_Humidity label="Humidity [%s]" icon="humidity"
+            Text item=Balcony_HT_Battery label="Sensor battery [%d%%]" icon="battery"
+        }
+
+        Group item=Entrance label="Entrance" {
+            Text item=Entrance_Battery_1 label="Motion sensor 1 battery [%d%%]" icon="battery"
+        }
     }
-    Frame label="Balcony" {
-        Text item=Balcony_HT_Temperature label="Temperature [%.1f °C]" icon="temperature"
-        Text item=Balcony_HT_Humidity label="Humidity [%s]" icon="humidity"
-        Text item=Balcony_HT_Battery label="Sensor battery [%d%%]" icon="battery"
-    }
-    Frame label="Entrance" {
-        Text item=Entrance_Battery_1 label="Motion sensor 1 battery [%d%%]" icon="battery"
-    }
-    Frame label="Astro" {
+
+    Frame label="Other" {
         Text item=vTimeOfDay label="Time of day is [%s]" icon="sun"
     }
 }

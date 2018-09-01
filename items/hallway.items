@@ -17,11 +17,11 @@ Number Hallway_Battery_1 "Battery: [%d %%]" <battery> { channel="mihome:sensor_m
 Switch Hallway_BatteryLow_1 <energy> { channel="mihome:sensor_motion_aq2:158d0001e0b206:lowBattery" }
 
 // Hue bulb 1
-Switch Hallway_Hue01_Switch <lightbulb> (Hallway_Lights_Switch) { channel="hue:0100:0017887647e7:8:brightness", expire="1m,command=OFF" }
+Switch Hallway_Hue01_Switch <lightbulb> (Hallway_Lights_Switch) { channel="hue:0100:0017887647e7:8:brightness", expire="5s,command=OFF" }
 Dimmer Hallway_Hue01_Dimmer <lightbulb> (Hallway_Lights_Dimmer) { channel="hue:0100:0017887647e7:8:brightness" }
 
 // Hue bulb 2
-Switch Hallway_Hue02_Switch <lightbulb> (Hallway_Lights_Switch) { channel="hue:0100:0017887647e7:10:brightness", expire="1m,command=OFF" }
+Switch Hallway_Hue02_Switch <lightbulb> (Hallway_Lights_Switch) { channel="hue:0100:0017887647e7:10:brightness", expire="5s,command=OFF" }
 Dimmer Hallway_Hue02_Dimmer <lightbulb> (Hallway_Lights_Dimmer) { channel="hue:0100:0017887647e7:10:brightness" }
 
 // Proxy Switches

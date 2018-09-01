@@ -1,7 +1,36 @@
-// rule "Never turn off lights"
-// when 
-//     Item Living_Room_Wall_Switch changed to OFF
+val logName = "living_room.rules"
+
+rule "Switch TV Input" when 
+    Item Bravia_Input_Switch received update
+then
+    val input = Bravia_Input_Switch.state.toString
+    logInfo(logName, "Switching TV to: " + input)
+    switch (input) {
+        case "HDMI1": {
+            Bravia_Input_HDMI1.sendCommand(ON)
+        }
+        case "HDMI2": {
+            Bravia_Input_HDMI2.sendCommand(ON)
+        }
+        case "HDMI3": {
+            Bravia_Input_HDMI3.sendCommand(ON)
+        }
+        case "HDMI4": {
+            Bravia_Input_HDMI4.sendCommand(ON)
+        }
+    }
+end
+
+rule "Turn ON TV"
+when
+    Item Bravia_Power received command ON
+then
+    Bravia_Power_WOL.sendCommand(ON)
+end
+
+// rule "Turn OFF TV"
+// when
+//     Item Bravia_Power received command OFF
 // then
-//   logInfo("living_room.rules", "Lights turned ff, turning them on")
-//   Living_Room_Wall_Switch.sendCommand(ON)
+//     Bravia_Power_WOL.postUpdate(OFF)
 // end

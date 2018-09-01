@@ -1,0 +1,65 @@
+// Xiamo Roborock - CONTROL
+////////////////////////////
+
+String XiaVac_action_Control     "State"     (gXiaomiVac)       {channel="miio:vacuum:05C165FC:actions#control" }
+Number XiaVac_action_Fan         "Mode"         (gXiaomiVac)       {channel="miio:vacuum:05C165FC:actions#fan" }
+String XiaVac_action_Command     "Vacuum Command"                        {channel="miio:vacuum:05C165FC:actions#commands" }
+
+// Xiamo Roborock - STATUS
+////////////////////////////
+
+Number XiaVac_status_Battery     "Battery Level [%1.0f%%]"       <battery>   (gXiaomiVac,gXiaomiVacStat) {channel="miio:vacuum:05C165FC:status#battery" }
+Number XiaVac_status_Area        "Cleaned Area [%1.0fm²]"        <zoom>      (gXiaomiVac,gXiaomiVacStat) {channel="miio:vacuum:05C165FC:status#clean_area" }
+Number XiaVac_status_Time        "Cleaning Time [%1.0f']"        <clock>     (gXiaomiVac,gXiaomiVacStat) {channel="miio:vacuum:05C165FC:status#clean_time" }
+String XiaVac_status_Error       "Error [%s]"                    <error>     (gXiaomiVac,gXiaomiVacStat) {channel="miio:vacuum:05C165FC:status#error_code" }
+Number XiaVac_status_FanPower    "Fan Power [%1.0f %%]"          <signal>    (gXiaomiVacStat) {channel="miio:vacuum:05C165FC:status#fan_power" } 
+Number XiaVac_status_CleanStats  "In Cleaning Status [%1.0f]"    <switch>    (gXiaomiVacStat) {channel="miio:vacuum:05C165FC:status#in_cleaning" }
+Switch XiaVac_status_DND         "DND Activated"                             (gXiaomiVacStat) {channel="miio:vacuum:05C165FC:status#dnd_enabled" }
+String XiaVac_status_State       "Status [%s]"                   <status>    (gXiaomiVacStat) {channel="miio:vacuum:05C165FC:status#state"} 
+
+// Xiamo Roborock - VERBRAUCH
+////////////////////////////
+
+Number XiaVac_Verbrauch_MainT       "Main Brush [%1.0f]"        (gXiaomiVacUsage) {channel="miio:vacuum:05C165FC:consumables#main_brush_time"}
+Number XiaVac_Verbrauch_MainP       "Main Brush [%1.0f%%]"      (gXiaomiVacUsage) {channel="miio:vacuum:05C165FC:consumables#main_brush_percent"}
+Number XiaVac_Verbrauch_SideT       "Side Brush [%1.0f]"        (gXiaomiVacUsage) {channel="miio:vacuum:05C165FC:consumables#side_brush_time"}
+Number XiaVac_Verbrauch_SideP       "Side Brush [%1.0f%%]"      (gXiaomiVacUsage) {channel="miio:vacuum:05C165FC:consumables#side_brush_percent"}
+Number XiaVac_Verbrauch_FilterT     "Filter Time[%1.0f]"        (gXiaomiVacUsage) {channel="miio:vacuum:05C165FC:consumables#filter_time" }
+Number XiaVac_Verbrauch_FilterP     "Filter Time[%1.0f%%]"      (gXiaomiVacUsage) {channel="miio:vacuum:05C165FC:consumables#filter_percent" }
+Number XiaVac_Verbrauch_SensorT     "Sensor [%1.0f]"            (gXiaomiVacUsage) {channel="miio:vacuum:05C165FC:consumables#sensor_dirt_time"}
+Number XiaVac_Verbrauch_SensorP     "Sensor [%1.0f%%]"          (gXiaomiVacUsage) {channel="miio:vacuum:05C165FC:consumables#sensor_dirt_percent"}
+
+// Xiamo Roborock - DND - Do not Disturb
+////////////////////////////
+
+Switch XiaVac_DND_Function       "DND Function"          <moon>          (gXiaomiVacDND) {channel="miio:vacuum:05C165FC:dnd#dnd_function"}
+String XiaVac_DND_Start          "DND Start Time [%s]"   <clock>         (gXiaomiVacDND) {channel="miio:vacuum:05C165FC:dnd#dnd_start"}
+String XiaVac_DND_End            "DND End Time [%s]"     <clock-on>      (gXiaomiVacDND) {channel="miio:vacuum:05C165FC:dnd#dnd_end"}
+
+// Xiamo Roborock - HISTORY
+////////////////////////////
+
+Number XiaVac_history_Area    "Total Cleaned Area [%1.0fm²]"     <zoom>      (gXiaomiVacHistory) {channel="miio:vacuum:05C165FC:history#total_clean_area"}
+Number XiaVac_history_Time    "Total Clean Time [%1.0f']"        <clock>     (gXiaomiVacHistory) {channel="miio:vacuum:05C165FC:history#total_clean_time"}
+Number XiaVac_history_Count   "Total # Cleanings [%1.0f]"        <office>    (gXiaomiVacHistory) {channel="miio:vacuum:05C165FC:history#total_clean_count"}
+
+// Xiamo Roborock - NETWORK
+////////////////////////////
+
+String  XiaVac_NetSSID    "Network SSID [%s]"     <network>   (gXiaomiVac,gXiaomiVacNetwork) {channel="miio:vacuum:05C165FC:network#ssid" }
+String  XiaVac_NetBSSID   "Network BSSID [%s]"    <network>   (gXiaomiVac,gXiaomiVacNetwork) {channel="miio:vacuum:05C165FC:network#bssid" }
+Number  XiaVac_NetRSSI    "Network RSSI [%1.0f]"  <network>   (gXiaomiVac,gXiaomiVacNetwork) {channel="miio:vacuum:05C165FC:network#rssi" }
+Number  XiaVac_NetLife    "Uptime [%1.0f]"        <clock>     (gXiaomiVac,gXiaomiVacNetwork) {channel="miio:vacuum:05C165FC:network#life" }
+
+
+// Vacuum Switches
+Switch Vacuum_Guest_Bedroom_Switch "Vacuum in Guest Bedroom" (Vacuum_Zone_Clean_Switches) [ "Switchable" ]
+Switch Vacuum_Guest_Bathroom_Switch "Vacuum in Guest Bathroom" (Vacuum_Zone_Clean_Switches) [ "Switchable" ]
+Switch Vacuum_Children_Bedroom_Switch "Vacuum in Children Bedroom" (Vacuum_Zone_Clean_Switches) [ "Switchable" ]
+Switch Vacuum_Hallway_Switch "Vacuum in Hallway" (Vacuum_Zone_Clean_Switches) [ "Switchable" ]
+Switch Vacuum_Kitchen_Switch "Vacuum in Kitchen" (Vacuum_Zone_Clean_Switches) [ "Switchable" ]
+Switch Vacuum_LivingRoom_Switch "Vacuum in Living Room" (Vacuum_Zone_Clean_Switches) [ "Switchable" ]
+Switch Vacuum_Bedroom_Switch "Vacuum in Bedroom" (Vacuum_Zone_Clean_Switches) [ "Switchable" ]
+Switch Vacuum_Bathroom_Switch "Vacuum in Bathroom" (Vacuum_Zone_Clean_Switches) [ "Switchable" ]
+Switch Vacuum_Switch "Vacuum" [ "Switchable" ]
+String Vacuum_Zone_Cleaning "Zone"

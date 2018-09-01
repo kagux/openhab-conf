@@ -1,0 +1,73 @@
+val logName = "vacuum.rules"
+
+rule "Zone Cleaning"
+when
+    Item Vacuum_Zone_Cleaning received command
+then
+    switch (receivedCommand.toString) {
+        case "Vacuum in Guest Bedroom": {
+            XiaVac_action_Command.sendCommand("app_zoned_clean[[22901,25441,25401,27891,1],[25274,25208,26924,26358,1],[26948,25511,28548,26361,1]]")
+        }
+        case "Vacuum in Guest Bathroom": {
+            XiaVac_action_Command.sendCommand("app_zoned_clean[[26738,26465,28238,28415,1]]")
+        }
+        case "Vacuum in Children Bedroom": {
+            XiaVac_action_Command.sendCommand("app_zoned_clean[[26940,24974,28190,25474,1],[25126,22438,28426,24988,1]]")
+        }
+        case "Vacuum in Hallway": {
+            XiaVac_action_Command.sendCommand("app_zoned_clean[[28555,24668,30305,26418,1],[29118,19848,30118,24648,1]]")
+        }
+        case "Vacuum in Kitchen": {
+            XiaVac_action_Command.sendCommand("app_zoned_clean[[25222,20055,29122,21805,1]]")
+        }
+        case "Vacuum in Living Room": {
+            XiaVac_action_Command.sendCommand("app_zoned_clean[[23623,16572,30173,18972,1],[27204,18937,30354,19887,1]]")
+        }
+        case "Vacuum in Bedroom": {
+            XiaVac_action_Command.sendCommand("app_zoned_clean[[30868,20098,31918,22798,1],[30666,16709,33816,20059,1]]")
+        }
+        case "Vacuum in Bathroom": {
+            XiaVac_action_Command.sendCommand("app_zoned_clean[[32037,20175,33887,21725,1]]")
+        }
+    }
+end
+
+rule "Zone Switch ON"
+when
+    Item Vacuum_Zone_Clean_Switches changed to ON
+then
+    Vacuum_Zone_Clean_Switches.members.forEach [ item | 
+        if (item.state == ON) {
+            logInfo(logName, "Turning ON " + item.label) 
+            Vacuum_Zone_Cleaning.sendCommand(item.label)
+        }
+    ]	
+end
+
+rule "Return to the base"
+when
+    Item Vacuum_Zone_Clean_Switches changed to OFF or  
+    Item Vacuum_Switch received command OFF
+then
+    XiaVac_action_Control.sendCommand("dock")
+end
+
+rule "Update switches when charging"
+when
+    Item XiaVac_status_State received update "Charging"
+then
+    Vacuum_Zone_Clean_Switches.members.forEach [ item | 
+        if (item.state == ON) {
+            logInfo(logName, "Turning OFF " + item.label) 
+            item.postUpdate(OFF)
+        }
+    ]	
+end
+
+rule "Clean home"
+when 
+    Item Vacuum_Switch received command ON
+then
+    logInfo(logName, "Cleaning home")
+    XiaVac_action_Control.sendCommand("vacuum")
+end

@@ -1,3 +1,15 @@
 // Xiaomi Aqara Mains Powered Wall Switch 2
-Switch Living_Room_Wall_Switch_Button1 "Wall Switch Button 1" <switch> (Living_Room_Wall_Switch) { channel="mihome:ctrl_neutral2:158d000215287d:ch1" }
-Switch Living_Room_Wall_Switch_Button2 "Wall Switch Button 2" <switch> (Living_Room_Wall_Switch) { channel="mihome:ctrl_neutral2:158d000215287d:ch2" }
+Switch Living_Room_Wall_Switch_Button1 "Table Lights" <switch> (Living_Room_Wall_Switch) { channel="mihome:ctrl_neutral2:158d000215287d:ch1" }
+Switch Living_Room_Wall_Switch_Button2 "TV Lights" <switch> (Living_Room_Wall_Switch) { channel="mihome:ctrl_neutral2:158d000215287d:ch2" }
+
+// Sony Bravia TV
+Number Bravia_IR "IR [%s]" { channel="sony:scalar:00000000-0000-1010-8000-d8d43c199567:system-sysCmd" }
+Switch Bravia_Power "TV" <switch>  ["Switchable"] { channel="sony:scalar:00000000-0000-1010-8000-d8d43c199567:system-powerstatus" }
+Switch Bravia_Power_WOL "TV Power WOL" { wol="192.168.1.15#F4:B7:E2:0D:C5:89"}
+Dimmer Bravia_Volume "Volume [%s]" <soundvolume> { channel="sony:scalar:00000000-0000-1010-8000-d8d43c199567:audio-speaker-volume" }
+Switch Bravia_AudioMute "TV Mute" <soundvolume> ["Switchable"] { channel="sony:scalar:00000000-0000-1010-8000-d8d43c199567:audio-speaker-mute" }
+String Bravia_Input_Switch "Input [%s]" <receiver>
+Switch Bravia_Input_HDMI1 "Playstation in Living Room" { channel="sony:scalar:00000000-0000-1010-8000-d8d43c199567:avContent-content-extInput-extInput__3hdmi-0000-cn_status"}
+Switch Bravia_Input_HDMI2 "Chromecast in Living Room" { channel="sony:scalar:00000000-0000-1010-8000-d8d43c199567:avContent-content-extInput-extInput__3hdmi-0001-cn_status"}
+Switch Bravia_Input_HDMI3 "HDMI 3" { channel="sony:scalar:00000000-0000-1010-8000-d8d43c199567:avContent-content-extInput-extInput__3hdmi-0002-cn_status"}
+Switch Bravia_Input_HDMI4 "Fire stick in Living Room" { channel="sony:scalar:00000000-0000-1010-8000-d8d43c199567:avContent-content-extInput-extInput__3hdmi-0003-cn_status"}
