@@ -14,7 +14,7 @@ Group:Dimmer:AVG Bedroom_Entrance_Lights_Dimmer "Bedroom Entrance Lights Dimmer"
 
 // Living Room
 Group Living_Room "Living Room"
-Group:Switch:OR(ON,OFF) Living_Room_Wall_Switch "Living room lights" (Living_Room) [ "Lighting" ]
+Group:Switch:OR(ON,OFF) Living_Room_Wall_Switch "Living room lights" (Living_Room)
 Group Living_Room_Tv "Living Room TV"
 
 // Balcony

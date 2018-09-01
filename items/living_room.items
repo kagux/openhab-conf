@@ -1,6 +1,6 @@
 // Xiaomi Aqara Mains Powered Wall Switch 2
-Switch Living_Room_Wall_Switch_Button1 "Table Lights" <switch> (Living_Room_Wall_Switch) { channel="mihome:ctrl_neutral2:158d000215287d:ch1" }
-Switch Living_Room_Wall_Switch_Button2 "TV Lights" <switch> (Living_Room_Wall_Switch) { channel="mihome:ctrl_neutral2:158d000215287d:ch2" }
+Switch Living_Room_Wall_Switch_Button1 "Table Lights" <switch> ["Lighting"] (Living_Room_Wall_Switch) { channel="mihome:ctrl_neutral2:158d000215287d:ch1" }
+Switch Living_Room_Wall_Switch_Button2 "TV Lights" <switch> ["Lighting"] (Living_Room_Wall_Switch) { channel="mihome:ctrl_neutral2:158d000215287d:ch2" }
 
 // Sony Bravia TV
 Number Bravia_IR "IR [%s]" { channel="sony:scalar:00000000-0000-1010-8000-d8d43c199567:system-sysCmd" }
