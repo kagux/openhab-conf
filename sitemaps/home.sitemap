@@ -1,6 +1,4 @@
 sitemap home label="Home Automation" {
-    // Frame label="Mia & Mat Bedroom" {
-    // }
     Frame label="General" {
         Group item=gXiaomiVac label="Vacuum"{
                 Switch item=XiaVac_action_Control mappings=[vacuum="Vacuum", pause="Pause",spot="Spot", dock="Dock"]
@@ -34,6 +32,24 @@ sitemap home label="Home Automation" {
     }
 
     Frame label="Rooms" {
+        Group item=Living_Room label="Living Room" {
+            Group item=Living_Room_Tv label="TV" icon="screen" {
+                Switch	item=Bravia_Power label="Power" icon="switch"
+                Slider	item=Bravia_Volume label="Volume" icon="soundvolume"
+                Switch item=Bravia_AudioMute label="Mute" icon="soundvolume"
+                Selection item=Bravia_Input_Switch label="Source" mappings=[HDMI1="PS4", HDMI2="CHROMECAST", HDMI4="FireTV"] icon="receiver"
+ 
+            }
+            Switch item=Living_Room_Wall_Switch label="All lights" icon="light"
+            Switch item=Living_Room_Wall_Switch_Button1 label="Entrance Lights" icon="light"
+            Switch item=Living_Room_Wall_Switch_Button2 label="TV Area Lights" icon="light"
+        }
+
+        Group item=Nursery label="Nursery" {
+            Switch item=Nursery_Speaker_Story label="Play Story" icon="player"
+            
+        }
+
         Group item=Hallway label="Hallway" {
             Text item=Hallway_Exit_Door label="Exit door" icon="door"
             Switch item=Hallway_Lights_Switch label="All lights" icon="light"
@@ -52,19 +68,6 @@ sitemap home label="Home Automation" {
             Slider item=Bedroom_Entrance_Lights_Dimmer label="Lights Brightness"icon="slider"
             Text item=Bedroom_Entrance_Battery_1 label="Motion sensor 1 battery [%d%%]" icon="battery"
             Text item=Bedroom_Entrance_Battery_2 label="Motion sensor 2 battery [%d%%]" icon="battery"
-        }
-
-        Group item=Living_Room label="Living Room" {
-            Group item=Living_Room_Tv label="TV" {
-                Switch	item=Bravia_Power label="Power" icon="switch"
-                Slider	item=Bravia_Volume label="Volume" icon="soundvolume"
-                Switch item=Bravia_AudioMute label="Mute" icon="soundvolume"
-                Selection item=Bravia_Input_Switch label="Source" mappings=[HDMI1="PS4", HDMI2="CHROMECAST", HDMI4="FireTV"] icon="receiver"
- 
-            }
-            Switch item=Living_Room_Wall_Switch label="All lights" icon="light"
-            Switch item=Living_Room_Wall_Switch_Button1 label="Entrance Lights" icon="light"
-            Switch item=Living_Room_Wall_Switch_Button2 label="TV Area Lights" icon="light"
         }
 
         Group item=Balcony label="Balcony" {

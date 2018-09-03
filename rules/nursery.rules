@@ -1,0 +1,25 @@
+import java.util.List
+
+val logName = "nursery.rules"
+
+val List<String> stories = newArrayList(
+    // три поросенка
+    "https://stat2.deti-online.com/a/L7ydwOWOKjVmTfRnpx8gaA/1536307282/files/skazki/sbornik-skazok/tri-porosenka.mp3" 
+)
+
+rule "Play a story"
+when 
+  Item Nursery_Speaker_Story changed to ON
+then 
+  val story = stories.get(0)
+  logInfo(logName, "Playing story: " + story)
+  Nursery_Speaker_URL.sendCommand(story)
+end
+
+rule "Stop Speaker"
+when 
+  Item Nursery_Speaker_Story changed to OFF
+then 
+  logInfo(logName, "Stopping speaker")
+  Nursery_Speaker.sendCommand(PAUSE)
+end

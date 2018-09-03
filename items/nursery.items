@@ -1,0 +1,7 @@
+
+// Google Home
+Dimmer Nursery_Speaker_Volume <soundvolume> (Nursery) { channel="chromecast:chromecast:e9f79844362dfcda58b36c4ebdd1a60f:volume" }
+Player Nursery_Speaker <player> (Nursery) { channel="chromecast:chromecast:e9f79844362dfcda58b36c4ebdd1a60f:control" }
+String Nursery_Speaker_URL    (gTest) { channel="chromecast:chromecast:e9f79844362dfcda58b36c4ebdd1a60f:playuri"}
+
+Switch Nursery_Speaker_Story "Story" (Nursery)

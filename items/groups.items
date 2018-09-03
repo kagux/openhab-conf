@@ -2,7 +2,7 @@
 Group Hallway "Hallway"
 Group Hallway_Lights "Hallway Lights" (Hallway)
 Group:Switch:OR(ON,OFF) Hallway_Lights_Switch "Hallway Lights Switch" (Hallway_Lights)
-Group:Dimmer:AVG Hallway_Lights_Dimmer "Hallway Lights Dimmer" (Hallway_Lights)
+Group:Dimmer:AVG Hallway_Lights_Dimmer "Hallway Lights" (Hallway_Lights) ["Lighting"]
 Group:Number:MAX Hallway_Luminance "Hallway Luminance" (Hallway)
 
 // Bedroom
@@ -10,7 +10,7 @@ Group Bedroom "Hallway"
 Group Bedroom_Entrance "Bedroom Entrance" (Bedroom)
 Group Bedroom_Entrance_Lights "Bedroom Entrance Lights" (Bedroom_Entrance)
 Group:Switch:OR(ON,OFF) Bedroom_Entrance_Lights_Switch "Bedroom Entrance Lights Switch" (Bedroom_Entrance_Lights)
-Group:Dimmer:AVG Bedroom_Entrance_Lights_Dimmer "Bedroom Entrance Lights Dimmer" (Bedroom_Entrance_Lights)
+Group:Dimmer:AVG Bedroom_Entrance_Lights_Dimmer "Bedroom Entrance Lights" (Bedroom_Entrance_Lights) ["Lighting"] 
 
 // Living Room
 Group Living_Room "Living Room"
@@ -36,3 +36,7 @@ Group  gXiaomiVacDND            "Do Not Disturb Settings"   <moon>              
 Group  gXiaomiVacHistory        "Cleaning History"          <calendar>          (gXiaomiVac)
 Group  gXiaomiVacNetwork        "Network Details"           <network>           (gXiaomiVac)
 Group:Switch:OR(ON,OFF)  Vacuum_Zone_Clean_Switches "Vacuum Clean Switches" (gXiaomiVac)
+
+// Nursery
+
+Group Nursery

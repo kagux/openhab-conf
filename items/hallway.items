@@ -2,7 +2,7 @@
 Switch Hallway_Motion "Motion [%s]" <motion> (Hallway) { channel="zwave:device:5bdcd162:node2:sensor_binary" }
 //DateTime Hallway_Motion_Last_Detected "Last Motion [%1$tm/%1$td %1$tH:%1$tM]" <motion>  (Hallway)
 Number Hallway_Alarm "Alarm: [%s]" <fire> (Hallway) { channel="zwave:device:5bdcd162:node2:alarm_burglar" }
-Number Hallway_Temperature "Temperature: [%.1f °C]" <temperature> (Hallway) { channel="zwave:device:5bdcd162:node2:sensor_temperature" }
+Number Hallway_Temperature "Home Temperature" <temperature> (Hallway) ["CurrentTemperature"] { channel="zwave:device:5bdcd162:node2:sensor_temperature" }
 Number Hallway_Humidity "Humidity: [%.0f %%]" <humidity> (Hallway) { channel="zwave:device:5bdcd162:node2:sensor_relhumidity" }
 Number Hallway_Luminance_2 "Luminance: [%.0f Lux]" <sun> (Hallway_Luminance) { channel="zwave:device:5bdcd162:node2:sensor_luminance" }
 Number Hallway_UV "Luminance: [UV index %d]" <sun> (Hallway) { channel="zwave:device:5bdcd162:node2:sensor_ultraviolet" }
