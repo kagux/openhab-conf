@@ -13,3 +13,9 @@ Switch Bravia_Input_HDMI1 "Playstation in Living Room" { channel="sony:scalar:00
 Switch Bravia_Input_HDMI2 "Chromecast in Living Room" { channel="sony:scalar:00000000-0000-1010-8000-d8d43c199567:avContent-content-extInput-extInput__3hdmi-0001-cn_status"}
 Switch Bravia_Input_HDMI3 "HDMI 3" { channel="sony:scalar:00000000-0000-1010-8000-d8d43c199567:avContent-content-extInput-extInput__3hdmi-0002-cn_status"}
 Switch Bravia_Input_HDMI4 "Fire stick in Living Room" { channel="sony:scalar:00000000-0000-1010-8000-d8d43c199567:avContent-content-extInput-extInput__3hdmi-0003-cn_status"}
+
+// Google Home
+// Dimmer Nursery_Speaker_Volume <soundvolume> (Nursery) { channel="chromecast:chromecast:a5d5fba585d9008df2052715567fdcd6:volume" }
+// Player Nursery_Speaker <player> (Nursery) { channel="chromecast:chromecast:a5d5fba585d9008df2052715567fdcd6:control" }
+// String Nursery_Speaker_URL (Nursery) { channel="chromecast:chromecast:a5d5fba585d9008df2052715567fdcd6:playuri"}
+// String Nursery_Speaker_Status (Nursery) { channel="chromecast:chromecast:a5d5fba585d9008df2052715567fdcd6:statustext"}
