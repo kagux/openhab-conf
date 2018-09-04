@@ -46,8 +46,16 @@ sitemap home label="Home Automation" {
         }
 
         Group item=Nursery label="Nursery" {
-            Switch item=Nursery_Speaker_Story label="Play Story" icon="player"
-            
+            Switch item=Nursery_Random_Story label="Играть сказку"
+            Slider item=Nursery_Speaker_Volume label="Громкость" icon="soundvolume" 
+            Group item=Nursery_Story label="Сказки" {
+                Switch item=Nursery_Story_Tri_Porosenka label="Три поросенка" icon="player"
+                Switch item=Nursery_Story_Duymovochka label="Дюймовочка" icon="player"
+                Switch item=Nursery_Story_Krasnaya_Shapochka label="Красная шапочка" icon="player"
+                Switch item=Nursery_Story_Baba_Yaga label="Баба Яга" icon="player"
+                Switch item=Nursery_Story_Masha_y_Medved label="Маша и Медведь" icon="player"
+                Switch item=Nursery_Story_Zarevna_Lyagushka label="Царевна Лягушка" icon="player"
+            }
         }
 
         Group item=Hallway label="Hallway" {

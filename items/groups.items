@@ -40,3 +40,5 @@ Group:Switch:OR(ON,OFF)  Vacuum_Zone_Clean_Switches "Vacuum Clean Switches" (gXi
 // Nursery
 
 Group Nursery
+Group Nursery_Story (Nursery)
+Group:Switch:OR(ON,OFF) Nursery_Story_Switch (Nursery_Story)

@@ -1,25 +1,61 @@
-import java.util.List
+import java.util.Map
+import org.openhab.core.library.types.Object
 
 val logName = "nursery.rules"
 
-val List<String> stories = newArrayList(
-    // три поросенка
-    "https://stat2.deti-online.com/a/L7ydwOWOKjVmTfRnpx8gaA/1536307282/files/skazki/sbornik-skazok/tri-porosenka.mp3" 
+val Map<String,String> stories = newHashMap(
+    "Nursery_Story_Tri_Porosenka" -> "https://stat2.deti-online.com/a/L7ydwOWOKjVmTfRnpx8gaA/1536307282/files/skazki/sbornik-skazok/tri-porosenka.mp3",
+    "Nursery_Story_Duymovochka" -> "https://stat2.deti-online.com/a/h0bOSq_TC4GASzHM7CgEHA/1536307399/files/skazki/skazki-andersena/dyuimovochka-2.mp3",
+    "Nursery_Story_Krasnaya_Shapochka" -> "https://stat1.deti-online.com/a/qq7Wb8_lWCi5ryMBdpsKzA/1536307880/files/audioskazki/krasnaja-shapochka-2.mp3",
+    "Nursery_Story_Masha_y_Medved" -> "https://stat2.deti-online.com/a/Pa0S1xAM0OnzCbrKUMpPUg/1536307191/files/skazki/russkie-narodnye-skazki/masha-i-medved.mp3",
+    "Nursery_Story_Zarevna_Lyagushka" -> "https://stat2.deti-online.com/a/pIGedgFBR3Rn7dnDyU8ACQ/1536307822/files/skazki/russkie-narodnye-skazki/carevna-ljagushka.mp3",
+    "Nursery_Story_Baba_Yaga" -> "https://stat1.deti-online.com/a/UL8MN5B8FaRXfJjQzJOS-g/1536307751/files/skazki/russkie-narodnye-skazki/baba-jaga.mp3"
 )
 
 rule "Play a story"
 when 
-  Item Nursery_Speaker_Story changed to ON
+  Item Nursery_Story_Switch changed to ON
 then 
-  val story = stories.get(0)
-  logInfo(logName, "Playing story: " + story)
-  Nursery_Speaker_URL.sendCommand(story)
+    Nursery_Story_Switch.members.forEach [ item | 
+      if (item.state == ON) {
+        val story = stories.get(item.name)
+        logInfo(logName, "Playing story: " + story)
+        Nursery_Speaker_URL.sendCommand(story)
+      }
+    ]	
+    Nursery_Random_Story.postUpdate(ON)
 end
+
+rule "Play a random story"
+when
+  Item Nursery_Random_Story received command ON
+then
+  val stories = Nursery_Story_Switch.members
+  val java.util.Random rand = new java.util.Random
+  val index = rand.nextInt(stories.size - 1)
+  stories.get(index).sendCommand(ON)
+end
+
 
 rule "Stop Speaker"
 when 
-  Item Nursery_Speaker_Story changed to OFF
+  Item Nursery_Story_Switch changed to OFF
 then 
   logInfo(logName, "Stopping speaker")
   Nursery_Speaker.sendCommand(PAUSE)
+  Nursery_Random_Story.postUpdate(OFF)
+end
+
+rule "Switch off stories"
+when
+  Item Nursery_Speaker_Status changed to "UNDEF" or
+  Item Nursery_Random_Story received command OFF
+then
+    Nursery_Story_Switch.members.forEach [ item | 
+      if (item.state == ON) {
+        val story = stories.get(item.name)
+        logInfo(logName, "Turning OFF story: " + story)
+        item.postUpdate(OFF)
+      }
+    ]	
 end

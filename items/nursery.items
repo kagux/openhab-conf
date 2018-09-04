@@ -1,7 +1,18 @@
 
 // Google Home
-Dimmer Nursery_Speaker_Volume <soundvolume> (Nursery) { channel="chromecast:chromecast:e9f79844362dfcda58b36c4ebdd1a60f:volume" }
-Player Nursery_Speaker <player> (Nursery) { channel="chromecast:chromecast:e9f79844362dfcda58b36c4ebdd1a60f:control" }
-String Nursery_Speaker_URL    (gTest) { channel="chromecast:chromecast:e9f79844362dfcda58b36c4ebdd1a60f:playuri"}
+// Dimmer Nursery_Speaker_Volume <soundvolume> (Nursery) { channel="chromecast:chromecast:e9f79844362dfcda58b36c4ebdd1a60f:volume" }
+// Player Nursery_Speaker <player> (Nursery) { channel="chromecast:chromecast:e9f79844362dfcda58b36c4ebdd1a60f:control" }
+// String Nursery_Speaker_URL    (gTest) { channel="chromecast:chromecast:e9f79844362dfcda58b36c4ebdd1a60f:playuri"}
+Dimmer Nursery_Speaker_Volume <soundvolume> (Nursery) { channel="chromecast:chromecast:a5d5fba585d9008df2052715567fdcd6:volume" }
+Player Nursery_Speaker <player> (Nursery) { channel="chromecast:chromecast:a5d5fba585d9008df2052715567fdcd6:control" }
+String Nursery_Speaker_URL (Nursery) { channel="chromecast:chromecast:a5d5fba585d9008df2052715567fdcd6:playuri"}
+String Nursery_Speaker_Status (Nursery) { channel="chromecast:chromecast:a5d5fba585d9008df2052715567fdcd6:statustext"}
 
-Switch Nursery_Speaker_Story "Story" (Nursery)
+Switch Nursery_Random_Story "A Bedtime Story" (Nursery) ["Switchable"] 
+
+Switch Nursery_Story_Tri_Porosenka "Story 1" (Nursery_Story_Switch)
+Switch Nursery_Story_Duymovochka "Story 2" (Nursery_Story_Switch)
+Switch Nursery_Story_Krasnaya_Shapochka "Story 3" (Nursery_Story_Switch)
+Switch Nursery_Story_Masha_y_Medved "Story 4" (Nursery_Story_Switch)
+Switch Nursery_Story_Zarevna_Lyagushka "Story 5" (Nursery_Story_Switch)
+Switch Nursery_Story_Baba_Yaga "Story 6" (Nursery_Story_Switch)
